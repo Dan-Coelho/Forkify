@@ -32,7 +32,7 @@ const controlRecipes = async function () {
   }
 };
 
-//Eventos para renderizar receitas
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes)
-);
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
