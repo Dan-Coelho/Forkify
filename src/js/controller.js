@@ -23,6 +23,8 @@ const controlRecipes = async function () {
     const id = window.location.hash.slice(1);
     if (!id) return;
     recipeView.renderSpinner();
+    //0- update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
     //1-Loading recipe
     await model.loadRecipe(id);
 
@@ -58,7 +60,9 @@ const controlServings = function (newServings) {
   //update the recipe servings (in state)
   model.updateServings(newServings);
   //update the recipe view
-  recipeView.render(model.state.recipe);
+  //recipeView.render(model.state.recipe);
+  //Ao invés de chamar o método render e renderizar todo o html de novo e travar o browser, usaremos o método update
+  recipeView.update(model.state.recipe);
 };
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
