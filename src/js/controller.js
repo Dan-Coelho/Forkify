@@ -64,9 +64,16 @@ const controlServings = function (newServings) {
   //Ao invés de chamar o método render e renderizar todo o html de novo e travar o browser, usaremos o método update
   recipeView.update(model.state.recipe);
 };
+const controlAddBookmark = function () {
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+  console.log(model.state.recipe);
+  recipeView.update(model.state.recipe);
+};
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHnadlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHendlerClick(controlPagination);
 };
